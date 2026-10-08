@@ -73,7 +73,8 @@ def download_transmission(url, path):
     if not object_ids:
         raise ValueError("Transmission query returned no features")
     features = []
-    batch_size = min(250, metadata.get("maxRecordCount", 250))
+    # Keep GET URLs under common proxy limits even for long object IDs.
+    batch_size = min(100, metadata.get("maxRecordCount", 100))
     for start in range(0, len(object_ids), batch_size):
         batch = object_ids[start:start + batch_size]
         data = checked_json(query, {"f": "geojson", "objectIds": ",".join(map(str, batch)),
