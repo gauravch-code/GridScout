@@ -1,0 +1,15 @@
+geopandas>=1.0,<2
+shapely>=2.0,<3
+pandas>=2.2,<3
+numpy>=1.26,<3
+pyarrow>=17,<24
+pyogrio>=0.10,<1
+openpyxl>=3.1,<4
+requests>=2.32,<3
+streamlit>=1.40,<2
+folium>=0.18,<1
+streamlit-folium>=0.24,<1
+openai>=1.60,<3
+python-dotenv>=1.0,<2
+pydantic>=2.10,<3
+pytest>=8,<10

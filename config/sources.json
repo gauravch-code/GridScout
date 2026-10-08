@@ -1,0 +1,25 @@
+{
+  "checked_on": "2026-10-08",
+  "counties": {
+    "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+    "landing_page": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+    "filename": "tl_2025_us_county.zip",
+    "vintage": "2025 TIGER/Line; STATEFP=48"
+  },
+  "plants": {
+    "url": "https://www.eia.gov/electricity/data/eia860/xls/eia8602025.zip",
+    "landing_page": "https://www.eia.gov/electricity/data/eia860/",
+    "filename": "eia8602025.zip",
+    "vintage": "2025 annual EIA-860"
+  },
+  "transmission": {
+    "url": "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/HIFLD_US_Electric_Power_Transmission_Lines/FeatureServer/0",
+    "landing_page": "https://catalog.data.gov/dataset/electric-power-transmission-lines",
+    "filename": "transmission.geojson",
+    "vintage": "Public ArcGIS copy of HIFLD; dataLastEditDate 2022-09-20; service edited 2024-06-11. Not a current grid inventory."
+  },
+  "optional_queue": {
+    "landing_page": "https://emp.lbl.gov/queues",
+    "vintage": "Queued Up 2026 edition (through end of 2025); discovery link only, not ingested"
+  }
+}

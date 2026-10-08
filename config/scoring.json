@@ -1,0 +1,8 @@
+{
+  "weights": {"transmission_distance": 0.4, "voltage": 0.2, "renewable_count": 0.15, "renewable_capacity": 0.25},
+  "normalization": {"distance_cap_m": 25000, "voltage_floor_kv": 115, "voltage_cap_kv": 500, "count_cap": 12, "capacity_cap_mw": 2000},
+  "grid_size_m": 5000,
+  "renewable_radius_m": 25000,
+  "minimum_voltage_kv": 115,
+  "crs": "EPSG:3083"
+}
