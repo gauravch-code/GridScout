@@ -22,6 +22,7 @@ def build_demo(data_dir):
     corridors = [LineString([(xmin + (xmax - xmin) * f, ymin), (xmin + (xmax - xmin) * (f + .12), ymax)]) for f in [.2,.4,.6,.75]]
     corridors += [LineString([(xmin, ymin + (ymax-ymin)*f), (xmax, ymin + (ymax-ymin)*(f+.1))]) for f in [.3,.5,.7]]
     lines = gpd.GeoDataFrame({"line_id": [f"DEMO-L{i}" for i in range(7)], "voltage_kv": [345,138,345,500,115,230,345], "owner": ["Synthetic"]*7, "sourcedate": ["synthetic"]*7, "volt_class": ["synthetic"]*7, "source_id": ["synthetic"]*7}, geometry=corridors, crs=CRS)
+    lines["status"] = "SYNTHETIC"
     points = []
     while len(points) < 260:
         point = Point(rng.uniform(xmin,xmax),rng.uniform(ymin,ymax))
@@ -32,5 +33,5 @@ def build_demo(data_dir):
     plants = gpd.GeoDataFrame({"plant_id": [f"DEMO-P{i}" for i in range(len(points))], "name": [f"Synthetic renewable {i:03}" for i in range(len(points))], "type": np.where(solar,"Solar","Wind"), "capacity_mw": mw, "solar_mw": np.where(solar,mw,0), "wind_mw": np.where(solar,0,mw), "renewable_mw": mw, "source_id": "synthetic"}, geometry=points, crs=CRS)
     for name, frame in [("counties",counties),("transmission",lines),("plants",plants)]:
         frame.to_parquet(data/f"{name}.parquet",index=False)
-    (data/"manifest.json").write_text(json.dumps({"mode":"synthetic", "crs":CRS, "sources":{"synthetic":{"vintage":"Seed 42, illustrative boundary and fictional infrastructure"}}}),encoding="utf-8")
+    (data/"manifest.json").write_text(json.dumps({"mode":"synthetic", "crs":CRS, "sources":{name:{"vintage":"Seed 42, illustrative boundary and fictional infrastructure","kind":"synthetic"} for name in ["counties","transmission","plants"]}}),encoding="utf-8")
     build_features(data)

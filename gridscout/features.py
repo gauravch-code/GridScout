@@ -6,7 +6,7 @@ from pathlib import Path
 import geopandas as gpd
 import numpy as np
 import pandas as pd
-from shapely import box
+from shapely import box, covers, intersects, prepare
 
 from .settings import read_config
 
@@ -31,8 +31,10 @@ def candidate_grid(counties, size_m=5000):
     xs, ys = np.meshgrid(np.arange(xmin, xmax, size_m), np.arange(ymin, ymax, size_m))
     cells = gpd.GeoDataFrame({"site_id": [f"TX-{int(x / size_m)}-{int(y / size_m)}-{int(size_m)}" for x, y in zip(xs.ravel(), ys.ravel())]},
                             geometry=[box(x, y, x + size_m, y + size_m) for x, y in zip(xs.ravel(), ys.ravel())], crs=counties.crs)
-    cells = cells.loc[cells.intersects(state)].copy()
-    cells.geometry = cells.geometry.intersection(state)
+    prepare(state)
+    cells = cells.loc[intersects(state, cells.geometry.array)].copy()
+    boundary = ~covers(state, cells.geometry.array)
+    cells.loc[boundary, "geometry"] = cells.loc[boundary].geometry.intersection(state)
     cells = cells.loc[cells.area > 1].reset_index(drop=True)
     points = cells.copy()
     # Representative points stay inside clipped border cells and offshore exclusions.

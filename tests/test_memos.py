@@ -2,11 +2,11 @@ from types import SimpleNamespace
 
 import pytest
 
-from gridscout.memos import MemoAgent, MemoPlan, default_plan, render_plan, validate_plan
+from gridscout.memos import CHECK_CATALOG, RISK_CATALOG, MemoAgent, MemoPlan, default_plan, render_plan, validate_plan, validate_source_fields
 
 
 def packet():
-    return {"mode":"synthetic","sources":{},"features":{"site_id":"A","county":"Fake","latitude":31,"longitude":-100,"score":.5,"rank":1,"distance_to_hv_m":3000,"line_id":"L","voltage_kv":345,"renewable_count":2,"solar_count":1,"wind_count":1,"renewable_capacity_mw":300,"radius_m":25000,"contribution_transmission_distance":.3,"contribution_voltage":.1,"contribution_renewable_count":.025,"contribution_renewable_capacity":.075}}
+    return {"mode":"synthetic","sources":{name:{"kind":"fake"} for name in ["counties","transmission","plants"]},"nearby_plants":[],"nearest_line":{},"risk_catalog":RISK_CATALOG,"check_catalog":CHECK_CATALOG,"features":{"site_id":"A","county":"Fake","latitude":31,"longitude":-100,"score":.5,"rank":1,"distance_to_hv_m":3000,"line_id":"L","voltage_kv":345,"renewable_count":2,"solar_count":1,"wind_count":1,"renewable_capacity_mw":300,"radius_m":25000,"contribution_transmission_distance":.3,"contribution_voltage":.1,"contribution_renewable_count":.025,"contribution_renewable_capacity":.075}}
 
 
 class FakeClient:
@@ -62,3 +62,11 @@ def test_reject_unknown_or_unsupported_choices():
     plan = MemoPlan(emphasis="balanced",strengths=["voltage"],risks=["interconnection"],next_checks=["interconnection"])
     with pytest.raises(ValueError,match="absent/zero"):
         validate_plan(plan,data)
+
+
+def test_reject_missing_source_reference():
+    data = packet()
+    memo = render_plan(default_plan(data),data)
+    memo["strengths"][0]["source_fields"] = ["sources.made_up"]
+    with pytest.raises(ValueError,match="Unresolved"):
+        validate_source_fields(memo,data)

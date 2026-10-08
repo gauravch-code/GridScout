@@ -17,7 +17,7 @@ st.set_page_config(page_title="GridScout | Discover storage opportunity",page_ic
 st.markdown("""<style>
 [data-testid="stAppViewContainer"]{background:#101820;color:#e7ecef}
 [data-testid="stSidebar"]{background:#151f29;border-right:1px solid #293746}
-.block-container{padding-top:2rem;max-width:1600px}
+.block-container{padding-top:3.5rem;max-width:1600px}
 h1,h2,h3{font-family:Georgia,serif!important;letter-spacing:-.035em}
 h1{font-size:3.4rem!important;line-height:1.06!important}
 .eyebrow{font:12px monospace;letter-spacing:2px;color:#78d6b6;text-transform:uppercase}
@@ -100,7 +100,7 @@ with detail_column:
     st.markdown("#### Why it surfaced")
     st.write(explain(site))
     breakdown = score_breakdown(site)
-    st.dataframe(breakdown,hide_index=True,width="stretch",column_config={"Normalized":st.column_config.ProgressColumn(min_value=0,max_value=1,format="%.2f"),"+ score":st.column_config.NumberColumn(format="+%.3f")})
+    st.dataframe(breakdown[["Signal","+ score"]],hide_index=True,width="stretch",column_config={"Signal":st.column_config.TextColumn(width="medium"),"+ score":st.column_config.NumberColumn(format="+%.3f",width="small")})
     st.markdown('<div class="signal-note">A nearby line is a research lead. Its voltage and proximity do not establish available interconnection capacity.</div>',unsafe_allow_html=True)
     with st.expander("Nearby renewable evidence"):
         nearby = json.loads(site.nearby_plants_json)
@@ -134,7 +134,7 @@ with detail_column:
 with map_column:
     st.caption("DISCOVERY FIELD · TOP 50 · CLICK A PROSPECT TO FOLLOW IT")
     view = build_map(top,lines,plants,counties,selected=site_id,show_lines=show_lines,show_plants=show_plants)
-    interaction = st_folium(view,height=680,width="100%",key=f"discovery_{mode_key}",returned_objects=["last_object_clicked_tooltip"])
+    interaction = st_folium(view,height=480,width="100%",key=f"discovery_{mode_key}_{site_id}",returned_objects=["last_object_clicked_tooltip"])
     clicked = interaction.get("last_object_clicked_tooltip") if interaction else None
     if clicked in ids and clicked != site_id:
         st.session_state.map_selection = clicked

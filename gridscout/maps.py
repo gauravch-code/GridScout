@@ -14,7 +14,10 @@ def score_color(score):
 
 
 def build_map(top, lines, plants, counties, selected=None, show_lines=True, show_plants=True):
-    map_view = folium.Map(location=[31.3,-99.4],zoom_start=6,tiles="CartoDB dark_matter",control_scale=True,prefer_canvas=True)
+    map_view = folium.Map(location=[31.3,-99.4],zoom_start=6,tiles="OpenStreetMap",control_scale=True,prefer_canvas=True)
+    map_view.get_root().header.add_child(folium.Element("<style>.leaflet-tile-pane{filter:grayscale(1) invert(1) brightness(.85)}.leaflet-container{background:#17242d}</style>"))
+    west,south,east,north = counties.to_crs(4326).total_bounds
+    map_view.fit_bounds([[south,west],[north,east]],padding=(12,12))
     borders = counties[["name","geometry"]].copy()
     borders.geometry = borders.geometry.simplify(700,preserve_topology=True)
     folium.GeoJson(borders.to_crs(4326).__geo_interface__,name="Texas counties",style_function=lambda _: {"color":"#8497aa","weight":.6,"fillOpacity":0,"opacity":.25}).add_to(map_view)

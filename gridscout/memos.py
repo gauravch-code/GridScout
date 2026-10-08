@@ -25,7 +25,7 @@ RISK_CATALOG = {
     "flood": "Flood exposure and other environmental constraints have not been assessed.",
     "economics": "Congestion, nodal prices, curtailment, and storage revenue have not been modeled. Renewable nameplate MW is not a measurement of surplus generation.",
     "vintage": "Transmission vintage and line-level source dates may be old; current topology must be verified. EIA capacity is an annual snapshot.",
-    "resolution": "A 5 km screening cell and its representative point are not a developable parcel or a proposed interconnection location.",
+    "resolution": "A screening cell and its representative point are not a developable parcel or a proposed interconnection location.",
 }
 CHECK_CATALOG = {
     "interconnection": "Check the relevant transmission provider and interconnection queue; confirm a feasible point of interconnection, study requirements, and potential network upgrades.",
@@ -50,7 +50,7 @@ def evidence_packet(site, lines, manifest, weights):
     features = {field: site[field].item() if hasattr(site[field],"item") else site[field] for field in fields}
     features.update({f"contribution_{f}":float(site[f"contribution_{f}"]) for f in FEATURES})
     line = lines.loc[lines.line_id.astype(str)==str(site.line_id)].iloc[0]
-    transmission = {field: str(line[field]) for field in ["line_id","owner","sourcedate","volt_class","source_id"]}
+    transmission = {field: str(line.get(field,"unknown")) for field in ["line_id","status","owner","sourcedate","volt_class","source_id"]}
     return {"features":features,"nearby_plants":json.loads(site.nearby_plants_json),"nearest_line":transmission,"sources":manifest["sources"],"mode":manifest["mode"],"weights":weights,"risk_catalog":RISK_CATALOG,"check_catalog":CHECK_CATALOG}
 
 
@@ -84,6 +84,16 @@ def render_plan(plan, packet):
             "strengths":[statements[key] for key in plan.strengths],"risks":[{"text":RISK_CATALOG[key],"source_fields":[f"risk_catalog.{key}"]} for key in plan.risks],"next_checks":[{"text":CHECK_CATALOG[key],"source_fields":[f"check_catalog.{key}"]} for key in plan.next_checks],"evidence":packet,"plan":plan.model_dump()}
 
 
+def validate_source_fields(memo, packet):
+    fields = memo["summary_source_fields"] + [field for section in ["strengths","risks","next_checks"] for item in memo[section] for field in item["source_fields"]]
+    for path in fields:
+        value = packet
+        for key in path.split("."):
+            if not isinstance(value,dict) or key not in value:
+                raise ValueError(f"Unresolved memo source field: {path}")
+            value = value[key]
+
+
 def default_plan(packet):
     strengths = sorted(eligible_strengths(packet),key=lambda name:packet["features"][f"contribution_{name}"],reverse=True)
     if not strengths:
@@ -109,6 +119,7 @@ class MemoAgent:
             if path.exists():
                 memo = json.loads(path.read_text(encoding="utf-8"))
                 validate_plan(MemoPlan.model_validate(memo["plan"]),packet)
+                validate_source_fields(memo,packet)
                 return memo
             if use_llm:
                 if self.calls >= self.max_calls:
@@ -128,6 +139,7 @@ class MemoAgent:
                 plan = default_plan(packet)
             validate_plan(plan,packet)
             memo = render_plan(plan,packet)
+            validate_source_fields(memo,packet)
             memo["writer"] = self.model if use_llm else "Deterministic evidence brief (no LLM)"
             temporary = path.with_suffix(".tmp")
             temporary.write_text(json.dumps(memo,indent=2,allow_nan=False),encoding="utf-8")

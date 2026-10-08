@@ -124,6 +124,11 @@ def clean_lines(frame, region, audit):
     if "voltage" not in frame:
         raise ValueError("Transmission file must have a numeric VOLTAGE (kV) field")
     frame = prepare_geometry(frame, "transmission", ["LineString", "MultiLineString"], audit)
+    if "status" not in frame:
+        frame["status"] = "UNKNOWN"
+    inactive = frame.status.astype(str).str.upper().str.strip().isin(["INACTIVE", "OUT OF SERVICE", "UNDER CONSTRUCTION", "PROPOSED"])
+    audit.record("transmission", "dropped_known_nonoperating_lines", inactive.sum())
+    frame = frame.loc[~inactive].copy()
     keep = frame.intersects(region)
     audit.record("transmission", "dropped_outside_texas_25km_buffer", (~keep).sum())
     frame = frame.loc[keep].copy()
@@ -141,7 +146,7 @@ def clean_lines(frame, region, audit):
     for field in ["owner", "sourcedate", "volt_class"]:
         if field not in frame:
             frame[field] = "unknown"
-    return frame[["line_id", "voltage_kv", "owner", "sourcedate", "volt_class", "source_id", "geometry"]].reset_index(drop=True)
+    return frame[["line_id", "voltage_kv", "status", "owner", "sourcedate", "volt_class", "source_id", "geometry"]].reset_index(drop=True)
 
 
 def read_eia_sheet(content, sheet, required):
