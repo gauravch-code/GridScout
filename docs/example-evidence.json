@@ -1,0 +1,193 @@
+{
+  "features": {
+    "site_id": "TX-379-1448-5000",
+    "county": "Wharton",
+    "county_geoid": "48481",
+    "latitude": 29.235927453943685,
+    "longitude": -95.9041874332783,
+    "score": 0.9145571295407465,
+    "rank": 1,
+    "cell_size_m": 5000,
+    "cell_area_km2": 25.0,
+    "distance_to_hv_m": 307.71187123581404,
+    "line_id": "307442",
+    "voltage_kv": 345.0,
+    "renewable_count": 12.0,
+    "solar_count": 10.0,
+    "wind_count": 2.0,
+    "renewable_capacity_mw": 2336.0,
+    "radius_m": 25000,
+    "contribution_transmission_distance": 0.395076610060227,
+    "contribution_voltage": 0.11948051948051948,
+    "contribution_renewable_count": 0.15,
+    "contribution_renewable_capacity": 0.25
+  },
+  "nearby_plants": [
+    {
+      "plant_id": "61875",
+      "name": "Cascade Solar (TX)",
+      "solar_mw": 10.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 10.0,
+      "distance_m": 12059.86512683396,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "62945",
+      "name": "Fighting Jays Solar Project",
+      "solar_mw": 227.5,
+      "wind_mw": 0.0,
+      "renewable_mw": 227.5,
+      "distance_m": 20475.842155448456,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "63273",
+      "name": "Wagyu",
+      "solar_mw": 120.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 120.0,
+      "distance_m": 23893.744680119387,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "64133",
+      "name": "Old 300 Solar Center, LLC",
+      "solar_mw": 430.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 430.0,
+      "distance_m": 13259.494781369416,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "64447",
+      "name": "Brazoria West",
+      "solar_mw": 200.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 200.0,
+      "distance_m": 23943.223000391325,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "65981",
+      "name": "Second Division Solar",
+      "solar_mw": 100.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 100.0,
+      "distance_m": 17378.604894679545,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "66046",
+      "name": "Brazoria County Solar Project (Danciger)",
+      "solar_mw": 200.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 200.0,
+      "distance_m": 15305.637177469109,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "66123",
+      "name": "Prairie Switch Wind LLC",
+      "solar_mw": 0.0,
+      "wind_mw": 163.2,
+      "renewable_mw": 163.2,
+      "distance_m": 24112.351671781056,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "66157",
+      "name": "Red Tailed Hawk Solar LLC",
+      "solar_mw": 360.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 360.0,
+      "distance_m": 24574.532087571006,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "66262",
+      "name": "Cutlass Solar II",
+      "solar_mw": 202.8,
+      "wind_mw": 0.0,
+      "renewable_mw": 202.8,
+      "distance_m": 20919.692568365197,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "67443",
+      "name": "Lane City Wind",
+      "solar_mw": 0.0,
+      "wind_mw": 202.5,
+      "renewable_mw": 202.5,
+      "distance_m": 12517.951851587171,
+      "source_id": "plants"
+    },
+    {
+      "plant_id": "68998",
+      "name": "Long Point Solar",
+      "solar_mw": 120.0,
+      "wind_mw": 0.0,
+      "renewable_mw": 120.0,
+      "distance_m": 22167.914336811507,
+      "source_id": "plants"
+    }
+  ],
+  "nearest_line": {
+    "line_id": "307442",
+    "status": "IN SERVICE",
+    "owner": "CENTERPOINT ENERGY",
+    "sourcedate": "2017-05-30 00:00:00+00:00",
+    "volt_class": "345",
+    "source_id": "transmission"
+  },
+  "sources": {
+    "counties": {
+      "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+      "landing_page": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "filename": "tl_2025_us_county.zip",
+      "vintage": "2025 TIGER/Line; STATEFP=48",
+      "sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+      "file": "tl_2025_us_county.zip"
+    },
+    "plants": {
+      "url": "https://www.eia.gov/electricity/data/eia860/xls/eia8602025.zip",
+      "landing_page": "https://www.eia.gov/electricity/data/eia860/",
+      "filename": "eia8602025.zip",
+      "vintage": "2025 annual EIA-860",
+      "sha256": "2b27929d26cc1da9ad6a530da1cac6718cd8496098ee560c4d47cfffd96d08ba",
+      "file": "eia8602025.zip"
+    },
+    "transmission": {
+      "url": "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/HIFLD_US_Electric_Power_Transmission_Lines/FeatureServer/0",
+      "landing_page": "https://catalog.data.gov/dataset/electric-power-transmission-lines",
+      "filename": "transmission.geojson",
+      "vintage": "Public ArcGIS copy of HIFLD; dataLastEditDate 2022-09-20; service edited 2024-06-11. Not a current grid inventory.",
+      "sha256": "dc2895fe2f84b3595ecd7a92353b15d10a13906e7c7ceac67958335d53080ceb",
+      "file": "transmission.geojson"
+    }
+  },
+  "mode": "public",
+  "weights": {
+    "transmission_distance": 0.4,
+    "voltage": 0.2,
+    "renewable_count": 0.15,
+    "renewable_capacity": 0.25
+  },
+  "risk_catalog": {
+    "interconnection": "Available interconnection capacity, upgrade costs, and queue position are unknown. Proximity to a line does not establish grid access.",
+    "land": "Land ownership, parcel availability, access, and buildable acreage have not been assessed.",
+    "permitting": "Local permitting requirements and approval timelines have not been assessed.",
+    "flood": "Flood exposure and other environmental constraints have not been assessed.",
+    "economics": "Congestion, nodal prices, curtailment, and storage revenue have not been modeled. Renewable nameplate MW is not a measurement of surplus generation.",
+    "vintage": "Transmission vintage and line-level source dates may be old; current topology must be verified. EIA capacity is an annual snapshot.",
+    "resolution": "A screening cell and its representative point are not a developable parcel or a proposed interconnection location."
+  },
+  "check_catalog": {
+    "interconnection": "Check the relevant transmission provider and interconnection queue; confirm a feasible point of interconnection, study requirements, and potential network upgrades.",
+    "land": "Identify parcels and owners, verify access and easements, and assess usable acreage with a land professional.",
+    "permitting": "Identify the local permitting authority and confirm applicable planning, fire-safety, and environmental requirements.",
+    "flood": "Screen FEMA flood maps and environmental constraints before selecting parcels.",
+    "economics": "Evaluate nodal price history, congestion and renewable generation profiles, then model battery revenues and costs.",
+    "vintage": "Cross-check the mapped line, voltage, service status, and nearby operating plants against current provider records."
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "mode": "public",
+  "created_at": "2026-10-08T22:48:04.178571+00:00",
+  "crs": "EPSG:3083",
+  "sources": {
+    "counties": {
+      "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+      "landing_page": "https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html",
+      "filename": "tl_2025_us_county.zip",
+      "vintage": "2025 TIGER/Line; STATEFP=48",
+      "sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+      "file": "tl_2025_us_county.zip"
+    },
+    "plants": {
+      "url": "https://www.eia.gov/electricity/data/eia860/xls/eia8602025.zip",
+      "landing_page": "https://www.eia.gov/electricity/data/eia860/",
+      "filename": "eia8602025.zip",
+      "vintage": "2025 annual EIA-860",
+      "sha256": "2b27929d26cc1da9ad6a530da1cac6718cd8496098ee560c4d47cfffd96d08ba",
+      "file": "eia8602025.zip"
+    },
+    "transmission": {
+      "url": "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/HIFLD_US_Electric_Power_Transmission_Lines/FeatureServer/0",
+      "landing_page": "https://catalog.data.gov/dataset/electric-power-transmission-lines",
+      "filename": "transmission.geojson",
+      "vintage": "Public ArcGIS copy of HIFLD; dataLastEditDate 2022-09-20; service edited 2024-06-11. Not a current grid inventory.",
+      "sha256": "dc2895fe2f84b3595ecd7a92353b15d10a13906e7c7ceac67958335d53080ceb",
+      "file": "transmission.geojson"
+    }
+  },
+  "audit": [
+    {
+      "dataset": "counties",
+      "reason": "selected_texas_counties",
+      "count": 254
+    },
+    {
+      "dataset": "counties",
+      "reason": "dropped_missing_or_empty_geometry",
+      "count": 0
+    },
+    {
+      "dataset": "counties",
+      "reason": "repaired_invalid_geometry",
+      "count": 0
+    },
+    {
+      "dataset": "counties",
+      "reason": "dropped_wrong_geometry_type_after_repair",
+      "count": 0
+    },
+    {
+      "dataset": "counties",
+      "reason": "dropped_nonfinite_projected_geometry",
+      "count": 0
+    },
+    {
+      "dataset": "transmission",
+      "reason": "dropped_missing_or_empty_geometry",
+      "count": 0
+    },
+    {
+      "dataset": "transmission",
+      "reason": "repaired_invalid_geometry",
+      "count": 0
+    },
+    {
+      "dataset": "transmission",
+      "reason": "dropped_wrong_geometry_type_after_repair",
+      "count": 0
+    },
+    {
+      "dataset": "transmission",
+      "reason": "dropped_nonfinite_projected_geometry",
+      "count": 0
+    },
+    {
+      "dataset": "transmission",
+      "reason": "dropped_known_nonoperating_lines",
+      "count": 4
+    },
+    {
+      "dataset": "transmission",
+      "reason": "dropped_outside_texas_25km_buffer",
+      "count": 3661
+    },
+    {
+      "dataset": "transmission",
+      "reason": "retained_unknown_voltage_excluded_from_hv_features",
+      "count": 486
+    },
+    {
+      "dataset": "transmission",
+      "reason": "dropped_duplicate_geometry_and_voltage",
+      "count": 60
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_invalid_plant_id",
+      "count": 0
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_invalid_plant_id",
+      "count": 1
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_duplicate_plant_records",
+      "count": 0
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_duplicate_generators",
+      "count": 0
+    },
+    {
+      "dataset": "plants",
+      "reason": "excluded_nonoperating_generators",
+      "count": 2259
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_generators_invalid_capacity",
+      "count": 0
+    },
+    {
+      "dataset": "plants",
+      "reason": "generators_without_plant_record",
+      "count": 0
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_invalid_coordinates",
+      "count": 0
+    },
+    {
+      "dataset": "plants",
+      "reason": "dropped_outside_texas_25km_buffer",
+      "count": 12760
+    },
+    {
+      "dataset": "counties",
+      "reason": "output_rows",
+      "count": 254
+    },
+    {
+      "dataset": "transmission",
+      "reason": "output_rows",
+      "count": 5883
+    },
+    {
+      "dataset": "plants",
+      "reason": "output_rows",
+      "count": 1047
+    }
+  ]
+}

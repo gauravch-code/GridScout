@@ -1,0 +1,52 @@
+{
+  "checked_at": "2026-10-08T22:39:11.691035+00:00",
+  "sources": {
+    "counties": {
+      "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+      "ok": true,
+      "status": 206,
+      "content_type": "application/zip",
+      "zip_signature": "PK",
+      "last_modified": "Tue, 23 Sep 2025 02:15:55 GMT"
+    },
+    "plants": {
+      "url": "https://www.eia.gov/electricity/data/eia860/xls/eia8602025.zip",
+      "ok": true,
+      "status": 206,
+      "content_type": "application/x-zip-compressed",
+      "zip_signature": "PK",
+      "last_modified": "Thu, 10 Sep 2026 16:20:14 GMT"
+    },
+    "transmission": {
+      "url": "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/HIFLD_US_Electric_Power_Transmission_Lines/FeatureServer/0",
+      "ok": true,
+      "fields": [
+        "OBJECTID_1",
+        "OBJECTID",
+        "ID",
+        "TYPE",
+        "STATUS",
+        "NAICS_CODE",
+        "NAICS_DESC",
+        "SOURCE",
+        "SOURCEDATE",
+        "VAL_METHOD",
+        "VAL_DATE",
+        "OWNER",
+        "VOLTAGE",
+        "VOLT_CLASS",
+        "INFERRED",
+        "SUB_1",
+        "SUB_2",
+        "SHAPE__Len",
+        "Shape__Length"
+      ],
+      "editingInfo": {
+        "lastEditDate": 1718114252033,
+        "schemaLastEditDate": 1718114252033,
+        "dataLastEditDate": 1663647399877
+      },
+      "sample_geometry": "LineString"
+    }
+  }
+}
